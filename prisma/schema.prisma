@@ -1,0 +1,163 @@
+generator client {
+  provider = "prisma-client"
+   output   = "../generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  APPLICANT
+}
+
+enum ApplicationStatus {
+  IN_PROGRESS
+  COMPLETE
+  REJECTED
+}
+
+enum StepStatus {
+  LOCKED
+  UNLOCKED
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AuditAction {
+  STEP_APPROVED
+  STEP_REJECTED
+  DOCUMENT_UPLOADED
+  DOCUMENT_DELETED
+  APPLICATION_CREATED
+  STEP_RESET
+  BUTTON_CLICKED
+}
+
+model User {
+  id          String   @id @default(cuid())
+  name        String
+  email       String   @unique
+  password    String
+  role        Role     @default(APPLICANT)
+  avatarColor String   @default("#6366F1")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  application   Application?
+  auditLogs     AuditLog[]
+  notifications Notification[]
+
+  @@map("users")
+}
+// خطوات النظام 
+model WorkflowStep {
+  id          String   @id @default(cuid())
+  label       String
+  description String
+  icon        String   @default("📄")
+  position    Int      @unique
+  isActive    Boolean  @default(true)
+
+  type        String   @default("input")     
+  requiresDocuments Boolean @default(false)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  applicationSteps ApplicationStep[]
+
+  @@map("workflow_steps")
+}
+// الطلب
+model Application {
+  id        String            @id @default(cuid())
+  status    ApplicationStatus @default(IN_PROGRESS)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  applicantId String @unique
+  applicant   User   @relation(fields: [applicantId], references: [id], onDelete: Cascade)
+
+  steps         ApplicationStep[]
+  auditLogs     AuditLog[]
+  notifications Notification[]
+
+  @@map("applications")
+}
+
+model ApplicationStep {
+  id              String     @id @default(cuid())
+  status          StepStatus @default(LOCKED)
+  rejectionReason String?
+  adminNote       String?
+  unlockedAt      DateTime?
+  submittedAt     DateTime?
+  reviewedAt      DateTime?
+   inputValue     String?    // ✅ لتخزين بيانات input
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  applicationId  String
+  application    Application  @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  workflowStepId String
+  workflowStep   WorkflowStep @relation(fields: [workflowStepId], references: [id])
+
+  documents ApplicationStepDocument[]
+  auditLogs AuditLog[]
+
+  @@unique([applicationId, workflowStepId])
+  @@map("application_steps")
+}
+// تنفيذ الخطوة
+model ApplicationStepDocument {
+  id          String   @id @default(cuid())
+  filename    String
+  storagePath String
+  mimeType    String
+  sizeBytes   Int
+  uploadedAt  DateTime @default(now())
+  isDeleted   Boolean  @default(false)
+
+  applicationStepId String
+  applicationStep   ApplicationStep @relation(fields: [applicationStepId], references: [id], onDelete: Cascade)
+
+  @@map("documents")
+}
+
+model AuditLog {
+  id        String      @id @default(cuid())
+  action    AuditAction
+  note      String?
+  createdAt DateTime    @default(now())
+
+  adminId String?
+  admin   User?   @relation(fields: [adminId], references: [id], onDelete: SetNull)
+
+  applicationId     String?
+  application       Application?     @relation(fields: [applicationId], references: [id], onDelete: SetNull)
+
+  applicationStepId String?
+  applicationStep   ApplicationStep? @relation(fields: [applicationStepId], references: [id], onDelete: SetNull)
+
+  @@map("audit_logs")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  applicationId String?
+  application   Application? @relation(fields: [applicationId], references: [id], onDelete: SetNull)
+
+  @@map("notifications")
+}

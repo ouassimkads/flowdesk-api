@@ -1,0 +1,43 @@
+# Node modules
+node_modules/
+# npm log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+.tmp/
+
+# Environment variables
+.env
+.env.*.local
+.env.local
+.env.production
+.env.test
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Debug
+*.log
+logs/
+*.pid
+*.seed
+
+# Optional: coverage reports
+coverage/
+jest-coverage/
+
+# Optional: npm cache
+.npm/
+.pnpm-store/
