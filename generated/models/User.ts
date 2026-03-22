@@ -20,8 +20,20 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  nationalNumber: number | null
+  phoneNumber: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  nationalNumber: number | null
+  phoneNumber: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -33,6 +45,11 @@ export type UserMinAggregateOutputType = {
   avatarColor: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  nationalNumber: number | null
+  personalAdress: string | null
+  workAdress: string | null
+  academicLevel: string | null
+  phoneNumber: number | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -44,6 +61,11 @@ export type UserMaxAggregateOutputType = {
   avatarColor: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  nationalNumber: number | null
+  personalAdress: string | null
+  workAdress: string | null
+  academicLevel: string | null
+  phoneNumber: number | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -55,9 +77,24 @@ export type UserCountAggregateOutputType = {
   avatarColor: number
   createdAt: number
   updatedAt: number
+  nationalNumber: number
+  personalAdress: number
+  workAdress: number
+  academicLevel: number
+  phoneNumber: number
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  nationalNumber?: true
+  phoneNumber?: true
+}
+
+export type UserSumAggregateInputType = {
+  nationalNumber?: true
+  phoneNumber?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -68,6 +105,11 @@ export type UserMinAggregateInputType = {
   avatarColor?: true
   createdAt?: true
   updatedAt?: true
+  nationalNumber?: true
+  personalAdress?: true
+  workAdress?: true
+  academicLevel?: true
+  phoneNumber?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -79,6 +121,11 @@ export type UserMaxAggregateInputType = {
   avatarColor?: true
   createdAt?: true
   updatedAt?: true
+  nationalNumber?: true
+  personalAdress?: true
+  workAdress?: true
+  academicLevel?: true
+  phoneNumber?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -90,6 +137,11 @@ export type UserCountAggregateInputType = {
   avatarColor?: true
   createdAt?: true
   updatedAt?: true
+  nationalNumber?: true
+  personalAdress?: true
+  workAdress?: true
+  academicLevel?: true
+  phoneNumber?: true
   _all?: true
 }
 
@@ -131,6 +183,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -161,6 +225,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -174,7 +240,14 @@ export type UserGroupByOutputType = {
   avatarColor: string
   createdAt: Date
   updatedAt: Date
+  nationalNumber: number | null
+  personalAdress: string | null
+  workAdress: string | null
+  academicLevel: string | null
+  phoneNumber: number | null
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -206,6 +279,11 @@ export type UserWhereInput = {
   avatarColor?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  nationalNumber?: Prisma.IntNullableFilter<"User"> | number | null
+  personalAdress?: Prisma.StringNullableFilter<"User"> | string | null
+  workAdress?: Prisma.StringNullableFilter<"User"> | string | null
+  academicLevel?: Prisma.StringNullableFilter<"User"> | string | null
+  phoneNumber?: Prisma.IntNullableFilter<"User"> | number | null
   application?: Prisma.XOR<Prisma.ApplicationNullableScalarRelationFilter, Prisma.ApplicationWhereInput> | null
   auditLogs?: Prisma.AuditLogListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
@@ -220,6 +298,11 @@ export type UserOrderByWithRelationInput = {
   avatarColor?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  nationalNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  personalAdress?: Prisma.SortOrderInput | Prisma.SortOrder
+  workAdress?: Prisma.SortOrderInput | Prisma.SortOrder
+  academicLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   application?: Prisma.ApplicationOrderByWithRelationInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
@@ -237,6 +320,11 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   avatarColor?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  nationalNumber?: Prisma.IntNullableFilter<"User"> | number | null
+  personalAdress?: Prisma.StringNullableFilter<"User"> | string | null
+  workAdress?: Prisma.StringNullableFilter<"User"> | string | null
+  academicLevel?: Prisma.StringNullableFilter<"User"> | string | null
+  phoneNumber?: Prisma.IntNullableFilter<"User"> | number | null
   application?: Prisma.XOR<Prisma.ApplicationNullableScalarRelationFilter, Prisma.ApplicationWhereInput> | null
   auditLogs?: Prisma.AuditLogListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
@@ -251,9 +339,16 @@ export type UserOrderByWithAggregationInput = {
   avatarColor?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  nationalNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  personalAdress?: Prisma.SortOrderInput | Prisma.SortOrder
+  workAdress?: Prisma.SortOrderInput | Prisma.SortOrder
+  academicLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -268,6 +363,11 @@ export type UserScalarWhereWithAggregatesInput = {
   avatarColor?: Prisma.StringWithAggregatesFilter<"User"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  nationalNumber?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
+  personalAdress?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  workAdress?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  academicLevel?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  phoneNumber?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
 }
 
 export type UserCreateInput = {
@@ -279,6 +379,11 @@ export type UserCreateInput = {
   avatarColor?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  nationalNumber?: number | null
+  personalAdress?: string | null
+  workAdress?: string | null
+  academicLevel?: string | null
+  phoneNumber?: number | null
   application?: Prisma.ApplicationCreateNestedOneWithoutApplicantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutAdminInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
@@ -293,6 +398,11 @@ export type UserUncheckedCreateInput = {
   avatarColor?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  nationalNumber?: number | null
+  personalAdress?: string | null
+  workAdress?: string | null
+  academicLevel?: string | null
+  phoneNumber?: number | null
   application?: Prisma.ApplicationUncheckedCreateNestedOneWithoutApplicantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutAdminInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -307,6 +417,11 @@ export type UserUpdateInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nationalNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  personalAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   application?: Prisma.ApplicationUpdateOneWithoutApplicantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutAdminNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
@@ -321,6 +436,11 @@ export type UserUncheckedUpdateInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nationalNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  personalAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   application?: Prisma.ApplicationUncheckedUpdateOneWithoutApplicantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutAdminNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -335,6 +455,11 @@ export type UserCreateManyInput = {
   avatarColor?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  nationalNumber?: number | null
+  personalAdress?: string | null
+  workAdress?: string | null
+  academicLevel?: string | null
+  phoneNumber?: number | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -346,6 +471,11 @@ export type UserUpdateManyMutationInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nationalNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  personalAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -357,6 +487,11 @@ export type UserUncheckedUpdateManyInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nationalNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  personalAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -368,6 +503,16 @@ export type UserCountOrderByAggregateInput = {
   avatarColor?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  nationalNumber?: Prisma.SortOrder
+  personalAdress?: Prisma.SortOrder
+  workAdress?: Prisma.SortOrder
+  academicLevel?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  nationalNumber?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -379,6 +524,11 @@ export type UserMaxOrderByAggregateInput = {
   avatarColor?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  nationalNumber?: Prisma.SortOrder
+  personalAdress?: Prisma.SortOrder
+  workAdress?: Prisma.SortOrder
+  academicLevel?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -390,6 +540,16 @@ export type UserMinOrderByAggregateInput = {
   avatarColor?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  nationalNumber?: Prisma.SortOrder
+  personalAdress?: Prisma.SortOrder
+  workAdress?: Prisma.SortOrder
+  academicLevel?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
+}
+
+export type UserSumOrderByAggregateInput = {
+  nationalNumber?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -412,6 +572,18 @@ export type EnumRoleFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type UserCreateNestedOneWithoutApplicationInput = {
@@ -467,6 +639,11 @@ export type UserCreateWithoutApplicationInput = {
   avatarColor?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  nationalNumber?: number | null
+  personalAdress?: string | null
+  workAdress?: string | null
+  academicLevel?: string | null
+  phoneNumber?: number | null
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutAdminInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
@@ -480,6 +657,11 @@ export type UserUncheckedCreateWithoutApplicationInput = {
   avatarColor?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  nationalNumber?: number | null
+  personalAdress?: string | null
+  workAdress?: string | null
+  academicLevel?: string | null
+  phoneNumber?: number | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutAdminInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
@@ -509,6 +691,11 @@ export type UserUpdateWithoutApplicationInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nationalNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  personalAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   auditLogs?: Prisma.AuditLogUpdateManyWithoutAdminNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
@@ -522,6 +709,11 @@ export type UserUncheckedUpdateWithoutApplicationInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nationalNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  personalAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutAdminNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -535,6 +727,11 @@ export type UserCreateWithoutAuditLogsInput = {
   avatarColor?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  nationalNumber?: number | null
+  personalAdress?: string | null
+  workAdress?: string | null
+  academicLevel?: string | null
+  phoneNumber?: number | null
   application?: Prisma.ApplicationCreateNestedOneWithoutApplicantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
@@ -548,6 +745,11 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   avatarColor?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  nationalNumber?: number | null
+  personalAdress?: string | null
+  workAdress?: string | null
+  academicLevel?: string | null
+  phoneNumber?: number | null
   application?: Prisma.ApplicationUncheckedCreateNestedOneWithoutApplicantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
@@ -577,6 +779,11 @@ export type UserUpdateWithoutAuditLogsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nationalNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  personalAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   application?: Prisma.ApplicationUpdateOneWithoutApplicantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
@@ -590,6 +797,11 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nationalNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  personalAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   application?: Prisma.ApplicationUncheckedUpdateOneWithoutApplicantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -603,6 +815,11 @@ export type UserCreateWithoutNotificationsInput = {
   avatarColor?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  nationalNumber?: number | null
+  personalAdress?: string | null
+  workAdress?: string | null
+  academicLevel?: string | null
+  phoneNumber?: number | null
   application?: Prisma.ApplicationCreateNestedOneWithoutApplicantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutAdminInput
 }
@@ -616,6 +833,11 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   avatarColor?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  nationalNumber?: number | null
+  personalAdress?: string | null
+  workAdress?: string | null
+  academicLevel?: string | null
+  phoneNumber?: number | null
   application?: Prisma.ApplicationUncheckedCreateNestedOneWithoutApplicantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutAdminInput
 }
@@ -645,6 +867,11 @@ export type UserUpdateWithoutNotificationsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nationalNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  personalAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   application?: Prisma.ApplicationUpdateOneWithoutApplicantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutAdminNestedInput
 }
@@ -658,6 +885,11 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nationalNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  personalAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workAdress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   application?: Prisma.ApplicationUncheckedUpdateOneWithoutApplicantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutAdminNestedInput
 }
@@ -711,6 +943,11 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   avatarColor?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  nationalNumber?: boolean
+  personalAdress?: boolean
+  workAdress?: boolean
+  academicLevel?: boolean
+  phoneNumber?: boolean
   application?: boolean | Prisma.User$applicationArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
@@ -726,6 +963,11 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   avatarColor?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  nationalNumber?: boolean
+  personalAdress?: boolean
+  workAdress?: boolean
+  academicLevel?: boolean
+  phoneNumber?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -737,6 +979,11 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   avatarColor?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  nationalNumber?: boolean
+  personalAdress?: boolean
+  workAdress?: boolean
+  academicLevel?: boolean
+  phoneNumber?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -748,9 +995,14 @@ export type UserSelectScalar = {
   avatarColor?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  nationalNumber?: boolean
+  personalAdress?: boolean
+  workAdress?: boolean
+  academicLevel?: boolean
+  phoneNumber?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "avatarColor" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "avatarColor" | "createdAt" | "updatedAt" | "nationalNumber" | "personalAdress" | "workAdress" | "academicLevel" | "phoneNumber", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   application?: boolean | Prisma.User$applicationArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
@@ -776,6 +1028,11 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     avatarColor: string
     createdAt: Date
     updatedAt: Date
+    nationalNumber: number | null
+    personalAdress: string | null
+    workAdress: string | null
+    academicLevel: string | null
+    phoneNumber: number | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1210,6 +1467,11 @@ export interface UserFieldRefs {
   readonly avatarColor: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly nationalNumber: Prisma.FieldRef<"User", 'Int'>
+  readonly personalAdress: Prisma.FieldRef<"User", 'String'>
+  readonly workAdress: Prisma.FieldRef<"User", 'String'>
+  readonly academicLevel: Prisma.FieldRef<"User", 'String'>
+  readonly phoneNumber: Prisma.FieldRef<"User", 'Int'>
 }
     
 

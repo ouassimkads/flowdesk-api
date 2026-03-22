@@ -29,7 +29,7 @@ async function bootstrap() {
     //   'http://192.168.100.104:4141',
     //   'http://127.0.0.1:5173',
     // ],
-    origin : '*', 
+    origin: 'http://127.0.0.1:5173',
     credentials: true,
   });
 

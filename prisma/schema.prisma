@@ -45,7 +45,11 @@ model User {
   avatarColor String   @default("#6366F1")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
+  nationalNumber Int?
+  personalAdress String?
+  workAdress String?
+  academicLevel String?
+  phoneNumber Int?
   application   Application?
   auditLogs     AuditLog[]
   notifications Notification[]

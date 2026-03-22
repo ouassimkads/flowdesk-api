@@ -28,8 +28,19 @@ export class AuthService {
         email: dto.email,
         password: hashed,
         avatarColor: dto.avatarColor ?? '#6366F1',
+        phoneNumber: dto.phoneNumber,
+        academicLevel: dto.academicLevel,
+        personalAdress: dto.personalAdress,
+        workAdress: dto.workAdress,
       },
-      select: { id: true, name: true, email: true, role: true, avatarColor: true, createdAt: true },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        avatarColor: true,
+        createdAt: true,
+      },
     });
 
     // Create application + step rows for the new applicant

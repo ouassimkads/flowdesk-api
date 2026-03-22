@@ -2,9 +2,21 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
 const USER_SELECT = {
-  id: true, name: true, email: true,
-  role: true, avatarColor: true, createdAt: true,
+  id: true,
+  name: true,
+  email: true,
+  role: true,
+  avatarColor: true,
+  createdAt: true,
+  updatedAt: true,
+  nationalNumber: true,
+  personalAdress: true,
+  workAdress: true,
+  academicLevel: true,
+  phoneNumber: true,
 };
+
+
 
 @Injectable()
 export class UsersService {

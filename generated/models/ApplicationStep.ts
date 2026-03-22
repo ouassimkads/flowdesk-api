@@ -591,10 +591,6 @@ export type EnumStepStatusFieldUpdateOperationsInput = {
   set?: $Enums.StepStatus
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
